@@ -1,0 +1,8 @@
+安装mongoDB
+cd D:\mongodb\bin
+mongod --dbpath=D:\mongodb\data\db
+cd D:\mongodb\bin
+mongo
+
+run node.js
+在浏览器输入127.0.0.1:8888
