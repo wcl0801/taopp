@@ -9,27 +9,31 @@
         </el-carousel-item>
       </el-carousel>
     </div>
-
-      <div class="conent" @click="click" v-for="(movie,index) in movies" :key="index">
-        <div class="dy">
+    <div class="m_conent">
+      <div class="conent" v-for="(movie,index) in movies" :key="index">
+        <div class="dy_dt">
           <div class="tupian">
             <img :src="'https://gw.alicdn.com/'+movie.backgroundPicture" class="poster">
             <img src="../assets/play.png" class="play">
           </div>
           <div class="des">
             <div>{{movie.showName}}</div>
-            <p>
-              <span><img src="../assets/wjx.png" alt=""></span>
-              <span><img src="../assets/wjx.png" alt=""></span>
-              <span><img src="../assets/wjx.png" alt=""></span>
-              <span><img src="../assets/wjx.png" alt=""></span>
-              <span><img src="../assets/wjx.png" alt=""></span>
-              <span>{{movie.remark}}</span>
 
-            </p>
+            <el-rate
+              v-model="movie.remark"
+              disabled
+              show-score
+              text-color="#ff9900"
+              score-template="{value}">
+            </el-rate>
+              <!--<span>{{movie.remark}}</span>-->
+
+
+
+
             <p>导演:{{movie.director}}</p>
             <p>主演:{{movie.leadingRole}}</p>
-            <router-link to="/"><div class="btn">购票</div></router-link>
+            <router-link to="/dyy"><div class="btn">购票</div></router-link>
             <img src="../assets/jrzr1.png" class="td" v-bind:class="{active:isActive}">
             <img src="../assets/yzzr1.png" class="tw" v-bind:class="{active:isActive}">
           </div>
@@ -39,6 +43,7 @@
           <span><span>{{des.activityTag}}</span><span class="cer">|</span><span>{{des.activityTitle}}</span></span>
         </p>
       </div>
+    </div>
 
 
   </div>
@@ -80,8 +85,8 @@ export default {
     })
   },
   methods:{
-    click:function () {
-      this.$router.url="https://h5.m.taopiaopiao.com/app/moviemain/pages/show-detail/index.html?showid=164895&hasbuybtn=false";
+    click:function (movie) {
+      this.$emit('');
     }
   }
 }
@@ -126,15 +131,23 @@ a {
   .el-carousel__item:nth-child(2n+1) {
     background-color: #d3dce6;
   }
+  .m_conent{
+    padding-bottom: 4rem;
+    width: 100%;
+    overflow: hidden;
+  }
   .conent{
+
+
     padding-top: 15px;
     margin-left: 15px;
     position: relative;
     border-bottom: 1px solid gainsboro;
   }
 
-  .dy{
+  .dy_dt{
     overflow: hidden;
+    display: inline-block;
     padding: 0 15px 15px 0;
   }
 .tupian{
@@ -167,9 +180,13 @@ a {
     width: 60%;
   }
   .des p{
+    margin-top: .5rem;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+  }
+  .el-rate{
+    margin-top: .5rem;
   }
   .des img{
     width: 0.778rem;
@@ -211,7 +228,10 @@ a {
     padding: 0 0.4rem;
   }
   .b_des>span{
-
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
 </style>

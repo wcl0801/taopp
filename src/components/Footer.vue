@@ -2,7 +2,7 @@
     <div class="footer" id="fo">
         <div class="footer-nav">
           <router-link to="/">电影</router-link>
-          <router-link to="">影院</router-link>
+          <router-link to="/dyy">影院</router-link>
           <router-link to="/my">我的</router-link>
         </div>
 
