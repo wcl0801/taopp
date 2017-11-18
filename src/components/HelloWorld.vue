@@ -13,7 +13,7 @@
       <div class="conent" v-for="(movie,index) in movies" :key="index">
         <div class="dy_dt">
           <div class="tupian">
-            <img :src="'https://gw.alicdn.com/'+movie.backgroundPicture" class="poster">
+            <img :src="'https://gw.alicdn.com/'+movie.poster" class="poster">
             <img src="../assets/play.png" class="play">
           </div>
           <div class="des">
@@ -60,7 +60,7 @@ export default {
     return {
       msg: 'Welcome to Your Vue.js App',
       pic:[pic1,pic2,pic3],
-      movie:[],
+      pics:pic3,
       movies:[],
       isActive:true
     }
@@ -74,15 +74,22 @@ export default {
         this.movies = response.data;
         this.movies = this.movies.data.returnValue;
 
-        if(isArray(this.movies[0])){
-          isActive = false;
-        }
 
       }
     }.bind(this))
     .catch(function (error) {
       console.log(error)
     })
+    axios.get('http://localhost:8888/begin')
+      .then(function (response) {
+        console.log(response.data)
+        if (response.status === 200) {
+
+        }
+      }.bind(this))
+      .catch(function (error) {
+        console.log(error)
+      })
   },
   methods:{
     click:function (movie) {
@@ -158,10 +165,11 @@ a {
 }
 
 .tupian img{
-  max-width: 100%;
+  width: 100%;
 
 }
 .poster{
+  width:3.5rem;
   height:5.5rem;
 }
  .tupian .play{
@@ -177,7 +185,8 @@ a {
     text-align: left;
     font-size: 0.7778rem;
     padding-left:0.5556rem;
-    width: 60%;
+    width: 7rem;
+    overflow: hidden;
   }
   .des p{
     margin-top: .5rem;

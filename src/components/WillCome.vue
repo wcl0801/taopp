@@ -1,41 +1,56 @@
 <template>
-    <div class="will">
+    <div>
+      <div class="will" v-for="(willmovie,index) in willmovies" :key="willmovie.openTime">
         <p class="w_time">
-          <span>2017-08-30</span>
+          <span>{{willmovie.openTime}}</span>
           <span>星期三</span>
         </p>
-      <div class="w_con">
-        <div class="w_tu">
-          <img src="../assets/w_pic.jpg" alt="">
-          <img src="../assets/play.png" class="play">
+        <div class="w_con">
+          <div class="w_tu">
+            <img :src="'https://gw.alicdn.com/'+willmovie.poster" alt="">
+            <img src="../assets/play.png" class="play">
+          </div>
+          <div class="w_des">
+            <span class="w_name">{{willmovie.showName}}</span>
+            <p class="w_num">{{willmovie.wantCount}}人想看</p>
+            <p>导演:{{willmovie.director}}</p>
+            <p class="role">主演:{{willmovie.leadingRole}}</p>
+          </div>
+          <router-link to="">
+            <div class="w_btn">预售</div>
+          </router-link>
         </div>
-        <div class="w_des">
-          <span class="w_name">草原英雄小姐妹</span>
-          <p class="w_num">3532人想看</p>
-          <p>导演:那英太</p>
-          <p>主演:娜木罕,忽兰</p>
-        </div>
-        <router-link to="">
-          <div class="w_btn">预售</div>
-        </router-link>
-      </div>
 
-      <p class="w_time">
-        <span>2017-08-30</span>
-        <span>星期三</span>
-      </p>
+      </div>
     </div>
 
 </template>
 
 <script>
+  import axios from 'axios'
     export default {
         name: 'will',
         data() {
             return {
-                msg: 'Welcome to Your Vue.js App'
+                msg: 'Welcome to Your Vue.js App',
+              willmovies:[]
             }
-        }
+        },
+      mounted:function(){
+        axios.get('http://localhost:8888/begin')
+          .then(function (response) {
+            console.log(response)
+            if (response.status === 200) {
+              this.willmovies = response.data;
+              this.willmovies = this.willmovies.begin.returnValue;
+              this.willmovies = this.willmovies.soonShows;
+              console.log(this.willmovies)
+            }
+          }.bind(this))
+          .catch(function (error) {
+            console.log(error)
+          })
+      }
     }
 </script>
 
@@ -43,6 +58,7 @@
 <style scoped>
   .will{
     text-align: left;
+    margin-bottom: 3rem;
   }
   .w_time{
 
@@ -75,6 +91,7 @@
   }
   .w_des{
     float: left;
+    width: 10rem;
     padding:0 15px 0 10px ;
   }
   .w_des .w_name{
@@ -100,4 +117,10 @@
     color: #80d1ff;
     border-radius: .2rem;
   }
+  .role{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
 </style>
