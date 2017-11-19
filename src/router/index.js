@@ -4,13 +4,17 @@ import HelloWorld from '@/components/HelloWorld'
 
 import My from '@/components/My'
 import MyTaoBao from '@/components/MyTaoBao'
+import WillCome from '@/components/WillCome'
+import Detail from '@/components/Detail'
+import Dyy from '@/components/Dyy'
+import City from '@/components/selectCity'
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
       path: '/',
-      name: 'HelloWorld',
+      name: 'hello',
       component: HelloWorld
     },
     {
@@ -22,6 +26,26 @@ export default new Router({
       path:'/mytaobao',
       name:'MyTaoBao',
       component:MyTaoBao
+    },
+    {
+      path:'/will',
+      name:'will',
+      component:WillCome
+    },
+    {
+      path:'/detail',
+      name:'detail',
+      component:Detail
+    },
+    {
+      path:'/dyy',
+      name:'dyy',
+      component:Dyy
+    },
+    {
+      path:'/city',
+      name:'city',
+      component:City
     }
   ]
 })
