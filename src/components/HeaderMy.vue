@@ -10,7 +10,7 @@
       active-text-color="#90b4fc">
       <el-menu-item index="1">
         <img src="../assets/tpp.png" style="height: 1.3rem;background-color: #90b4fc;border-radius: 0.3rem">
-        <router-link to="/">太原</router-link>
+        <router-link to="/city">太原</router-link>
         <img src="../assets/jt.png" id="jt">
       </el-menu-item>
 

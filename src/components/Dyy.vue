@@ -1,5 +1,28 @@
 <template>
     <div class="dyy">
+      <el-menu
+        :default-active="activeIndex2"
+        class="el-menu-demo"
+        mode="horizontal"
+        @select="handleSelect"
+        background-color=""
+        text-color="#7e8c8d"
+        active-text-color="#90b4fc">
+        <el-menu-item index="1">
+          <img src="../assets/tpp.png" style="height: 1.3rem;background-color: #90b4fc;border-radius: 0.3rem">
+          <router-link to="/">太原</router-link>
+          <img src="../assets/jt.png" id="jt">
+        </el-menu-item>
+
+        <el-menu-item index="2">
+
+          <router-link to="/will">搜索</router-link>
+        </el-menu-item>
+        <el-menu-item index="3">
+
+          <router-link to="/">  筛选</router-link>
+        </el-menu-item>
+      </el-menu>
       <el-tabs v-model="activeName" @tab-click="handleClick">
         <el-tab-pane label="今天8-31" name="first">
           <div class="cinema" v-for="(cinemas,index) in cinema" :key="index">
@@ -131,7 +154,7 @@
               <div class="money"><span class="mar red">特</span>特惠</div>
               <div class="money">场次：23:59</div>
             </div>
-          </div>  
+          </div>
         </el-tab-pane>
       </el-tabs>
 
@@ -179,6 +202,34 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  .dyy{
+    width: 100%;
+    z-index: 50;
+    background: white;
+    position: absolute;
+    top:0;
+  }
+  #jt{
+    width:0.5rem;
+  }
+  .el-menu{
+
+    border:none;
+  }
+  .el-menu-item{
+    font-size: .875rem;
+    line-height: 2rem;
+    height:2rem;
+  }
+  .el-menu-item:last-child {
+    float: right;
+    background: url("../assets/choose.png") no-repeat left/30% 80%;
+  }
+  .el-menu-item:nth-child(2){
+    float: right;
+    border-left: 1px solid #ccc;
+    background: url("../assets/search.png") no-repeat left/30% 80%;
+  }
     .cinema{
       border-bottom: 1px solid gainsboro;
       margin-left: 15px;
