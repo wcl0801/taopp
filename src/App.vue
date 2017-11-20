@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <HeaderMy></HeaderMy>
+    <selectCity></selectCity>
     <router-view/>
     <FooterMy></FooterMy>
   </div>
@@ -8,12 +9,14 @@
 
 <script>
   import HeaderMy from '@/components/HeaderMy'
+  import selectCity from '@/components/selectCity/selectCity'
   import FooterMy from '@/components/Footer'
 export default {
   name: 'app',
   components:{
     HeaderMy,
-    FooterMy
+    FooterMy,
+    selectCity
   }
 }
 </script>

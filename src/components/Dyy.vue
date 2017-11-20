@@ -1,40 +1,24 @@
 <template>
     <div class="dyy">
-      <el-menu
-        :default-active="activeIndex2"
-        class="el-menu-demo"
-        mode="horizontal"
-        @select="handleSelect"
-        background-color=""
-        text-color="#7e8c8d"
-        active-text-color="#90b4fc">
-        <el-menu-item index="1">
-          <img src="../assets/tpp.png" style="height: 1.3rem;background-color: #90b4fc;border-radius: 0.3rem">
-          <router-link to="/">太原</router-link>
-          <img src="../assets/jt.png" id="jt">
-        </el-menu-item>
-
-        <el-menu-item index="2">
-
-          <router-link to="/will">搜索</router-link>
-        </el-menu-item>
-        <el-menu-item index="3">
-
-          <router-link to="/">  筛选</router-link>
-        </el-menu-item>
-      </el-menu>
+      <input type="text" class="input" placeholder="搜索" ref="b"><div class="cancel" @click="dis" ref="a">取消</div>
+      <div class="d_hd">
+        <div class="d_l">筛选</div>
+        <div class="d_r" @click="sw">搜索</div>
+      </div>
       <el-tabs v-model="activeName" @tab-click="handleClick">
         <el-tab-pane label="今天8-31" name="first">
-          <div class="cinema" v-for="(cinemas,index) in cinema" :key="index">
-            <p>{{cinemas.cinemaName}} <span class="money"> <span class="mon">58</span>元起</span></p>
-            <div class="money">{{cinemas.address}}</div>
-            <div>
-              <div class="money"><span class="mar">退票</span><span class="mar">改签</span><span class="mar">IMAX厅</span></div>
+          <router-link to="/go">
+            <div class="cinema" v-for="(cinemas,index) in cinema" :key="index">
+              <p style="color: black">{{cinemas.cinemaName}} <span class="money"> <span class="mon">58</span>元起</span></p>
+              <div class="money">{{cinemas.address}}</div>
+              <div>
+                <div class="money"><span class="mar">退票</span><span class="mar">改签</span><span class="mar">IMAX厅</span></div>
 
-            <div class="money"><span class="mar red">特</span>特惠</div>
-            <div class="money">场次：23:59</div>
+                <div class="money"><span class="mar red">特</span>特惠</div>
+                <div class="money">场次：{{cinemas.shows[0].dateShowTimeMap["1504108800"]}}</div>
+              </div>
             </div>
-          </div>
+          </router-link>
         </el-tab-pane>
         <el-tab-pane label="明天9-1" name="second">
           <div class="cinema" v-for="(cinemas,index) in cinema" :key="index">
@@ -44,7 +28,7 @@
               <div class="money"><span class="mar">退票</span><span class="mar">改签</span><span class="mar">IMAX厅</span></div>
 
               <div class="money"><span class="mar red">特</span>特惠</div>
-              <div class="money">场次：23:59</div>
+              <div class="money">场次：{{cinemas.shows[0].dateShowTimeMap["1504108800"]}}</div>
             </div>
           </div>
         </el-tab-pane>
@@ -56,7 +40,7 @@
               <div class="money"><span class="mar">退票</span><span class="mar">改签</span><span class="mar">IMAX厅</span></div>
 
               <div class="money"><span class="mar red">特</span>特惠</div>
-              <div class="money">场次：23:59</div>
+              <div class="money">场次：{{cinemas.shows[0].dateShowTimeMap["1504108800"]}}</div>
             </div>
           </div>
         </el-tab-pane>
@@ -68,7 +52,7 @@
               <div class="money"><span class="mar">退票</span><span class="mar">改签</span><span class="mar">IMAX厅</span></div>
 
               <div class="money"><span class="mar red">特</span>特惠</div>
-              <div class="money">场次：23:59</div>
+              <div class="money">场次：{{cinemas.shows[0].dateShowTimeMap["1504108800"]}}</div>
             </div>
           </div>
         </el-tab-pane>
@@ -80,7 +64,7 @@
               <div class="money"><span class="mar">退票</span><span class="mar">改签</span><span class="mar">IMAX厅</span></div>
 
               <div class="money"><span class="mar red">特</span>特惠</div>
-              <div class="money">场次：23:59</div>
+              <div class="money">场次：{{cinemas.shows[0].dateShowTimeMap["1504108800"]}}</div>
             </div>
           </div>
         </el-tab-pane>
@@ -92,7 +76,7 @@
               <div class="money"><span class="mar">退票</span><span class="mar">改签</span><span class="mar">IMAX厅</span></div>
 
               <div class="money"><span class="mar red">特</span>特惠</div>
-              <div class="money">场次：23:59</div>
+              <div class="money">场次：{{cinemas.shows[0].dateShowTimeMap["1504108800"]}}</div>
             </div>
           </div>
         </el-tab-pane>
@@ -104,7 +88,7 @@
               <div class="money"><span class="mar">退票</span><span class="mar">改签</span><span class="mar">IMAX厅</span></div>
 
               <div class="money"><span class="mar red">特</span>特惠</div>
-              <div class="money">场次：23:59</div>
+              <div class="money">场次：{{cinemas.shows[0].dateShowTimeMap["1504108800"]}}</div>
             </div>
           </div>
         </el-tab-pane>
@@ -116,7 +100,7 @@
               <div class="money"><span class="mar">退票</span><span class="mar">改签</span><span class="mar">IMAX厅</span></div>
 
               <div class="money"><span class="mar red">特</span>特惠</div>
-              <div class="money">场次：23:59</div>
+              <div class="money">场次：{{cinemas.shows[0].dateShowTimeMap["1504108800"]}}</div>
             </div>
           </div>
         </el-tab-pane>
@@ -128,7 +112,7 @@
               <div class="money"><span class="mar">退票</span><span class="mar">改签</span><span class="mar">IMAX厅</span></div>
 
               <div class="money"><span class="mar red">特</span>特惠</div>
-              <div class="money">场次：23:59</div>
+              <div class="money">场次：{{cinemas.shows[0].dateShowTimeMap["1504108800"]}}</div>
             </div>
           </div>
         </el-tab-pane>
@@ -140,7 +124,7 @@
               <div class="money"><span class="mar">退票</span><span class="mar">改签</span><span class="mar">IMAX厅</span></div>
 
               <div class="money"><span class="mar red">特</span>特惠</div>
-              <div class="money">场次：23:59</div>
+              <div class="money">场次：{{cinemas.shows[0].dateShowTimeMap["1504108800"]}}</div>
             </div>
           </div>
         </el-tab-pane>
@@ -152,7 +136,7 @@
               <div class="money"><span class="mar">退票</span><span class="mar">改签</span><span class="mar">IMAX厅</span></div>
 
               <div class="money"><span class="mar red">特</span>特惠</div>
-              <div class="money">场次：23:59</div>
+              <div class="money">场次：{{cinemas.shows[0].dateShowTimeMap["1504108800"]}}</div>
             </div>
           </div>
         </el-tab-pane>
@@ -177,6 +161,14 @@
       methods:{
         handleClick(tab, event) {
           console.log(tab, event);
+        },
+        dis:function () {
+          this.$refs.b.style.display = "none";
+          this.$refs.a.style.display = "none";
+        },
+        sw:function () {
+          this.$refs.a.style.display = "block";
+          this.$refs.b.style.display = "block";
         }
       },
       mounted:function () {
@@ -189,7 +181,7 @@
               this.cinema = this.cinema.mtopCinemas;
               for(var cinemas in this.cinema){
               this.do = this.cinemadisplaySupports;
-              console.log(cinemas)
+//              console.log(cinemas)
               }
             }
           }.bind(this))
@@ -202,12 +194,55 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  .dyy{
-    width: 100%;
-    z-index: 50;
-    background: white;
+  .cancel{
+    display: none;
     position: absolute;
+    top: 0;
+    right:0;
+    z-index: 2;
+    background: white;
+    width: 10%;
+    padding: 0.5rem;
+    color: #90b4fc;
+  }
+
+  .input{
+    display: none;
+    background: url("../assets/search.png") no-repeat 0 center;
+    background-color: white;
+    position: absolute;
+    z-index: 2;
     top:0;
+    left:0;
+    width:77%;
+    padding:.6rem 0 ;
+    padding-left: 1.5rem;
+  }
+  .d_hd{
+    display: flex;
+    position: absolute;
+    right:0;
+    top:10px;
+    width:50%;
+    background: white;
+  }
+  .d_l,.d_r{
+    padding-left: 2.5rem;
+  }
+  .d_l{
+    background: url("../assets/choose.png") no-repeat 1.3rem/30% 100%;
+  }
+  .d_r{
+    background: url("../assets/search.png") no-repeat 1.3rem/30% 100%;
+  }
+
+  .dyy{
+    /*width: 100%;*/
+    /*z-index: 50;*/
+    /*background: white;*/
+    /*position: absolute;*/
+    /*top:0;*/
+    font-size: .875rem;
   }
   #jt{
     width:0.5rem;
@@ -240,9 +275,10 @@
   .cinema p{
     width: 50%;
     overflow: hidden;
+
     white-space: nowrap;
     text-overflow: ellipsis;
-    font-size: 0.8rem;
+    font-size: 0.875rem;
     /*line-height: .rem;*/
     font-weight: 700;
   }

@@ -7,7 +7,9 @@ import MyTaoBao from '@/components/MyTaoBao'
 import WillCome from '@/components/WillCome'
 import Detail from '@/components/Detail'
 import Dyy from '@/components/Dyy'
-import City from '@/components/selectCity'
+import Go from '@/components/go'
+import Seat from '@/components/selectSeat'
+import Play from '@/components/player'
 Vue.use(Router)
 
 export default new Router({
@@ -43,9 +45,19 @@ export default new Router({
       component:Dyy
     },
     {
-      path:'/city',
-      name:'city',
-      component:City
+      path:'/go',
+      name:'go',
+      component:Go
+    },
+    {
+      path:'/seat',
+      name:'seat',
+      component:Seat
+    },
+    {
+      path:'/play',
+      name:'play',
+      component:Play
     }
   ]
 })

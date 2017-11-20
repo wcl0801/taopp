@@ -9,41 +9,46 @@
         </el-carousel-item>
       </el-carousel>
     </div>
-    <div class="m_conent">
-      <div class="conent" v-for="(movie,index) in movies" :key="index">
-        <div class="dy_dt">
-          <div class="tupian">
-            <img :src="'https://gw.alicdn.com/'+movie.poster" class="poster">
-            <img src="../assets/play.png" class="play">
-          </div>
-          <div class="des">
-            <div>{{movie.showName}}</div>
+    <router-link to="/detail">
+      <div class="m_conent">
+        <div class="conent" v-for="(movie,index) in movies" :key="index" @click="click(index)">
+          <div class="dy_dt">
+            <div class="tupian">
+              <img :src="'https://gw.alicdn.com/'+movie.poster" class="poster">
+              <router-link to="/play">
+                <img src="../assets/play.png" class="play">
+              </router-link>
+            </div>
+            <div class="des">
+              <div style="color:#000;">{{movie.showName}}</div>
 
-            <el-rate
-              v-model="movie.remark"
-              disabled
-              show-score
-              text-color="#ff9900"
-              score-template="{value}">
-            </el-rate>
+              <el-rate
+                v-model="movie.remark"
+                disabled
+                show-score
+                text-color="#ff9900"
+                score-template="{value}">
+              </el-rate>
               <!--<span>{{movie.remark}}</span>-->
 
 
 
 
-            <p>导演:{{movie.director}}</p>
-            <p>主演:{{movie.leadingRole}}</p>
-            <router-link to="/dyy"><div class="btn">购票</div></router-link>
-            <img src="../assets/jrzr1.png" class="td" v-bind:class="{active:isActive}">
-            <img src="../assets/yzzr1.png" class="tw" v-bind:class="{active:isActive}">
-          </div>
+              <p>导演:{{movie.director}}</p>
+              <p>主演:{{movie.leadingRole}}</p>
+              <router-link to="/dyy"><div class="btn">购票</div></router-link>
+              <img src="../assets/jrzr1.png" class="td"  v-if="index==0">
+              <img src="../assets/yzzr1.png" class="tw" v-if="index==0">
+              <p class="D3">{{movie.showMark}}</p>
+            </div>
 
+          </div>
+          <p class="b_des" v-for="des in movie.activities">
+            <span><span style="color: #fea54c">{{des.activityTag}}</span><span class="cer">|</span><span>{{des.activityTitle}}</span></span>
+          </p>
         </div>
-        <p class="b_des" v-for="des in movie.activities">
-          <span><span>{{des.activityTag}}</span><span class="cer">|</span><span>{{des.activityTitle}}</span></span>
-        </p>
       </div>
-    </div>
+    </router-link>
 
 
   </div>
@@ -66,6 +71,7 @@ export default {
     }
   },
   mounted:function () {
+    this.index = this.$route.params.index
     axios.get('http://localhost:8888/data')
     .then(function (response) {
       console.log(response.data)
@@ -84,16 +90,24 @@ export default {
       .then(function (response) {
         console.log(response.data)
         if (response.status === 200) {
+          if(this.index == 0){
+            this.isActive = false;
+          }
 
+          console.log(this.isActive)
         }
       }.bind(this))
       .catch(function (error) {
         console.log(error)
       })
+
   },
   methods:{
-    click:function (movie) {
-      this.$emit('');
+    detail:function () {
+      this.$router.push({name:'go'})
+    },
+    click:function (i) {
+      console.log(i)
     }
   }
 }
@@ -144,7 +158,7 @@ a {
     overflow: hidden;
   }
   .conent{
-
+  overflow: hidden;
 
     padding-top: 15px;
     margin-left: 15px;
@@ -206,11 +220,14 @@ a {
     top:0px;
     width: 1.5rem;
   }
-  #td{
-    right:5.75rem;
+  .td{
+    right:4.75rem;
   }
   .tw{
-    right:3.5rem;
+    right:2.5rem;
+  }
+  .D3{
+    position: absolute;top:0;right: 0;background: #90b4fc;transform: rotate(45deg);width: 80px;right: -20px;text-align: center;overflow: hidden;color: white;
   }
 .btn{
     position: absolute;

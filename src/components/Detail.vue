@@ -1,9 +1,11 @@
 <template>
     <div class="detail">
       <div class="d_head">
-        <div class="d_jt">
-          <img src="../assets/jiantou.png" alt="">
-        </div>
+        <router-link to="/">
+          <div class="d_jt">
+            <img src="../assets/jiantou.png" alt="">
+          </div>
+        </router-link>
         <p class="m_name">星际特工：千星之城</p>
       </div>
       <div class="d_title">
